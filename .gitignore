@@ -1,0 +1,12 @@
+# Files
+# ---
+auth_token.secret
+
+# Folders
+# ---
+venv/
+node_modules/
+.idea/
+.pytest_cache/
+.vscode/
+__pycache__/
