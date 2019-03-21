@@ -15,5 +15,3 @@ def read_auth_token_file(path: Optional[str] = None) -> str:
 
     with open(token_file_path, "r") as f:
         return f.readline().strip()
-
-

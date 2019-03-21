@@ -19,11 +19,13 @@ def private_key_required(fn):
     """Marks a route as a private/internal/system route.
     Will only be processed if Authorization token (ie. private key) matches.
     """
+
     @functools.wraps(fn)
     def wrapped(*args, **kwargs):
         if request.headers.get("Authorization") != app.config["SECRET_KEY"]:
             return "Unauthorized", 401
         return fn(*args, **kwargs)
+
     return wrapped
 
 
@@ -37,12 +39,9 @@ def get_stations():
 
 # Route
 # -----------------
-@app.route(
-    "/portal/api/route/<string:depart_station_code>-<string:arrival_station_code>/",
-    methods=["GET"]
-)
-def get_route(depart_station_code, arrival_station_code):
-    route = session.query(m.Route).get([depart_station_code, arrival_station_code])
+@app.route("/portal/api/route/<int:route_id>/", methods=["GET"])
+def get_route(route_id):
+    route = session.query(m.Route).get(route_id)
     return jsonify(route.serialize())
 
 
@@ -68,4 +67,6 @@ def update_route():
 @app.route("/portal/api/route/<id>/", methods=["DELETE"])
 def delete_route():
     pass
+
+
 # -----------------

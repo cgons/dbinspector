@@ -1,0 +1,2 @@
+class UnableToFetchTripsException(Exception):
+    pass

@@ -18,22 +18,25 @@ def create_route_and_associated_trips(dbsession: Session, route_info: Dict):
     entries will be updated however.
     """
     try:
-        # Upsert Routes
-        conn = dbsession.connection()
-        stmt = insert(m.Route).values(dict(
+        codes = dict(
             depart_station_code=route_info["depart_station_code"],
             arrival_station_code=route_info["arrival_station_code"],
-        ))
+        )
+
+        # Upsert Routes
+        conn = dbsession.connection()
+        stmt = insert(m.Route).values(codes)
         stmt = stmt.on_conflict_do_nothing()
         conn.execute(stmt)
 
+        route_id = dbsession.query(m.Route.id).filter_by(**codes).scalar()
+
+        # Fetch trips (from GO API) for route
+        trips = trip_service.fetch_trips_for_route(**codes)
+
         # Upsert Trips
-        trip_service.insert_trips_for_route(
-            dbsession,
-            route_info["depart_station_code"],
-            route_info["arrival_station_code"],
-            route_info["trips"],
-        )
+        trip_service.insert_trips_for_route(dbsession, route_id, trips)
+
         dbsession.commit()
     except Exception:
         dbsession.rollback()

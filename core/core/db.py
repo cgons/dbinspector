@@ -6,7 +6,7 @@ from flask_sqlalchemy_session import flask_scoped_session
 
 
 def get_db_uri(
-        host="localhost", username="postgres", password="postgres", dbname="gra", port=5432
+    host="localhost", username="postgres", password="postgres", dbname="gra", port=5432
 ):
     host = os.environ.get("DB_HOST", host)
     username = os.environ.get("DB_USERNAME", username)

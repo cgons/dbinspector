@@ -16,13 +16,15 @@ session = db.session_factory(engine)
 # Populate DB with Stations
 # ------------------------------------------------------------------------------------------
 
+
 def populate_stations():
     stations = fetch_stations()
 
     conn = engine.connect()
-    conn.execute(insert(Station).on_conflict_do_nothing(), [
-        dict(code=s["Code"], name=s["Name"]) for s in stations
-    ])
+    conn.execute(
+        insert(Station).on_conflict_do_nothing(),
+        [dict(code=s["Code"], name=s["Name"]) for s in stations],
+    )
 
 
 def fetch_stations() -> list:
@@ -40,6 +42,7 @@ def fetch_stations() -> list:
 # Check Refund Eligibility
 # ------------------------------------------------------------------------------------------
 
+
 def check_eligibility_for_all_routes():
     # Get a list of routes from DB
 
@@ -53,22 +56,28 @@ def check_eligibility_for_all_routes():
     pass
 
 
-def check_eligibility(date_str: str, arrival_station_code: str, trip_number: str) -> bool:
+def check_eligibility(
+    date_str: str, arrival_station_code: str, trip_number: str
+) -> bool:
     """Check refund eligibility of given route/date."""
     try:
-        url = "https://secure.gotransit.com/service/EligibilityService.svc/CheckEligible"
+        url = (
+            "https://secure.gotransit.com/service/EligibilityService.svc/CheckEligible"
+        )
         asc = arrival_station_code
         post_data = {
             "dateString": date_str,
             "arrivalstationCode": asc.upper(),
             "tripNumber": trip_number,
-            "lang": "en"
+            "lang": "en",
         }
         resp = requests.post(url, json=post_data)
         if resp.json()["CheckEligibleResult"]["ResultType"] == 1:
             return True
     except Exception:
-        logger.exception(f"Unable to determine eligibility status: "
-                         f"Arrival Station - {asc} | Trip No. - {trip_number}")
+        logger.exception(
+            f"Unable to determine eligibility status: "
+            f"Arrival Station - {asc} | Trip No. - {trip_number}"
+        )
 
     return False

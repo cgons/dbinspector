@@ -1,3 +1,4 @@
+import os
 import pytest
 import sqlalchemy as sa
 
@@ -48,17 +49,18 @@ class DBInspector(object):
             # Print queries issued
             inspector.log_queries(print_output=True, pretty=True)
     """
+
     def __init__(self, conn):
         self.conn = conn
         self.count = 0
         self.queries = []
-        sa.event.listen(conn, 'after_execute', self.callback)
+        sa.event.listen(conn, "after_execute", self.callback)
 
     def __enter__(self):
         return self
 
     def __exit__(self, *args):
-        sa.event.listen(self.conn, 'after_execute', self.callback)
+        sa.event.listen(self.conn, "after_execute", self.callback)
 
     def get_count(self):
         return self.count
@@ -76,6 +78,8 @@ class DBInspector(object):
     def callback(self, conn, query, *args):
         self.queries.append(query)
         self.count += 1
+
+
 # ------------------------------------------------------------------------------------------
 
 
@@ -89,16 +93,17 @@ def stations():
 
 @pytest.fixture()
 def routes():
-    return [
-        m.Route(depart_station_code="A", arrival_station_code="B")
-    ]
+    return [m.Route(id=1, depart_station_code="A", arrival_station_code="B")]
 
 
 @pytest.fixture()
 def trips():
-    return [
-        m.Trip(
-            depart_station_code="A", arrival_station_code="B", trip_number="101",
-            trip_time="05:35"
-        )
-    ]
+    return [m.Trip(trip_number="101", trip_time="05:35", route_id=1)]
+
+
+@pytest.fixture
+def trips_api_resp():
+    current_dir = os.path.dirname(__file__)
+    file_path = os.path.join(current_dir, "data", "trips.json")
+    with open(file_path, "r") as f:
+        return f.readlines()[0]

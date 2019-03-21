@@ -28,17 +28,30 @@ class Station(Base):
 class Route(Base):
     __tablename__ = "route"
 
-    depart_station_code = sa.Column(
-        sa.String(255), sa.ForeignKey("station.code"), primary_key=True)
-    arrival_station_code = sa.Column(
-        sa.String(255), sa.ForeignKey("station.code"), primary_key=True)
+    # Columns
+    # ---
+    id = sa.Column(sa.Integer, primary_key=True)
+    depart_station_code = sa.Column(sa.String(255), sa.ForeignKey("station.code"))
+    arrival_station_code = sa.Column(sa.String(255), sa.ForeignKey("station.code"))
 
+    # Relationships
+    # ---
     depart_station = relationship(
-        "Station", foreign_keys=[depart_station_code], lazy='joined')
+        "Station", foreign_keys=[depart_station_code], lazy="joined"
+    )
     arrival_station = relationship(
-        "Station", foreign_keys=[arrival_station_code], lazy='joined')
+        "Station", foreign_keys=[arrival_station_code], lazy="joined"
+    )
     trips = relationship("Trip", backref="route", lazy="subquery")
 
+    # Constraints
+    # ---
+    __table_args__ = (
+        sa.UniqueConstraint("depart_station_code", "arrival_station_code"),
+    )
+
+    # Methods
+    # ---
     def serialize(self):
         """Return a fully JSON serializable dict of a route, associated depart and arrival
         station names + associated trips."""
@@ -48,8 +61,9 @@ class Route(Base):
             "arrival_station": self.arrival_station.name,
             "arrival_station_code": self.arrival_station_code,
             "trips": [
-                dict(trip_number=t.trip_number, trip_time=t.trip_time) for t in self.trips
-            ]
+                dict(trip_number=t.trip_number, trip_time=t.trip_time)
+                for t in self.trips
+            ],
         }
 
 
@@ -58,11 +72,4 @@ class Trip(Base):
 
     trip_number = sa.Column(sa.String(255), primary_key=True)
     trip_time = sa.Column(sa.String(255), nullable=False)
-    depart_station_code = sa.Column(sa.String(255), nullable=False)
-    arrival_station_code = sa.Column(sa.String(255), nullable=False)
-
-    __table_args__ = (
-        sa.ForeignKeyConstraint(
-            ['depart_station_code', 'arrival_station_code'],
-            ['route.depart_station_code', 'route.arrival_station_code']),
-    )
+    route_id = sa.Column(sa.Integer, sa.ForeignKey("route.id"))
