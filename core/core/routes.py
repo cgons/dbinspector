@@ -34,7 +34,7 @@ def private_key_required(fn):
 @app.route("/portal/api/get-stations/")
 def get_stations():
     """Returns a list of stations stored in the DB"""
-    return jsonify(m.Station.get_stations())
+    return jsonify(m.Station.get_stations(session))
 
 
 # Route

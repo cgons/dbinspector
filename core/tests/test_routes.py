@@ -10,6 +10,15 @@ from core.application import app
 from core.services import trip_service
 
 
+def test_get_stations(dbsession, stations):
+    dbsession.add_all(stations)
+    dbsession.commit()
+
+    client = app.test_client()
+    resp = client.get("/portal/api/get-stations/")
+    print(resp)
+
+
 # Route Endpoint Test Cases
 # ------------------------------------------------------------------------------------------
 def test_get_route(dbsession, stations, routes, trips):
