@@ -10,7 +10,7 @@ from core import models as m
 from core import exceptions
 
 
-logger = logging.getLogger(__name__)
+log = logging.getLogger(__name__)
 
 
 GO_API_TRIPS_URL = (
@@ -46,12 +46,5 @@ def fetch_trips_for_route(depart_station_code, arrival_station_code):
         depart_station_code=depart_station_code,
         arrival_station_code=arrival_station_code,
     )
-    try:
-        resp = requests.get(uri)
-        return resp.json()["GetTripsResult"]["Trips"]
-    except Exception:
-        logger.exception(
-            "Unable to fetch Trips from GO API for route: "
-            "{depart_station_code} - {arrival_station_code}"
-        )
-        raise exceptions.UnableToFetchTripsException()
+    resp = requests.get(uri)
+    return resp.json()["GetTripsResult"]["Trips"]

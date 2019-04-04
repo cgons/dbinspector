@@ -62,15 +62,3 @@ def test_fetch_trips_for_route(trips_api_resp):
         trip = trips[0]
         assert "DepartTime" in trip
         assert "TripNumber" in trip
-
-
-def test_fetch_trips_for_route_raises_exception_on_error():
-    date_string = datetime.date.today().strftime("%m%d%Y")
-    uri = trip_service.GO_API_TRIPS_URL.format(
-        date_string=date_string, depart_station_code="A", arrival_station_code="B"
-    )
-
-    with requests_mock.Mocker() as m:
-        m.get(uri, exc=Exception)
-        with pytest.raises(exceptions.UnableToFetchTripsException):
-            trip_service.fetch_trips_for_route("A", "B")

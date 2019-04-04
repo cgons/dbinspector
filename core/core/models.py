@@ -8,7 +8,9 @@ class User(Base):
     __tablename__ = "user"
 
     id = sa.Column(sa.Integer, primary_key=True)
-    user_id = sa.Column(sa.String(255), unique=True, nullable=False)
+    global_id = sa.Column(sa.String(255), unique=True, nullable=False)
+
+    routes = relationship("UserRoute", backref="user", lazy="subquery")
 
 
 class Station(Base):
@@ -73,3 +75,10 @@ class Trip(Base):
     trip_number = sa.Column(sa.String(255), primary_key=True)
     trip_time = sa.Column(sa.String(255), nullable=False)
     route_id = sa.Column(sa.Integer, sa.ForeignKey("route.id"))
+
+
+class UserRoute(Base):
+    __tablename__ = "userroute"
+
+    user_id = sa.Column(sa.Integer, sa.ForeignKey("user.id"), primary_key=True)
+    route_id = sa.Column(sa.Integer, sa.ForeignKey("route.id"), primary_key=True)

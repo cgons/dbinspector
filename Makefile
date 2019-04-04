@@ -16,16 +16,18 @@ lint:
 	flake8
 
 dev-up:
-	docker-compose -f dev-compose.yml up
+	docker-compose -f docker/dev-compose.yml up
 
 dev-down:
-	docker-compose -f dev-compose.yml down
+	docker-compose -f docker/dev-compose.yml down
 
 test-up:
-	docker-compose -f test-compose.yml up
+	docker-compose -f docker/test-compose.yml up
 
 test-down:
-	docker-compose -f test-compose.yml down
+	docker-compose -f docker/test-compose.yml down
 
 run-dev:
-	cd core && FLASK_ENV=development FLASK_APP=core.application flask run
+	docker-compose -f docker/dev-compose.yml up -d && \
+	cd core && \
+	FLASK_ENV=development FLASK_APP=core.application ../venv/bin/flask run

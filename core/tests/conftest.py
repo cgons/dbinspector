@@ -84,6 +84,11 @@ class DBInspector(object):
 
 
 @pytest.fixture()
+def users():
+    return [m.User(id=1, global_id="1-abc")]
+
+
+@pytest.fixture()
 def stations():
     return [
         m.Station(code="A", name="Station A"),
@@ -94,6 +99,11 @@ def stations():
 @pytest.fixture()
 def routes():
     return [m.Route(id=1, depart_station_code="A", arrival_station_code="B")]
+
+
+@pytest.fixture()
+def userroutes():
+    return [m.UserRoute(user_id=1, route_id=1)]
 
 
 @pytest.fixture()
