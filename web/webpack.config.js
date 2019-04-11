@@ -12,16 +12,23 @@ const cssconfig = {
   module: {
     rules: [{
       test: /\.scss$/,
+      exclude: /node_modules/,
       use: [
         MiniCssExtractPlugin.loader,
-        "css-loader",
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+          }
+        },
+        "postcss-loader",
         "sass-loader"
       ]
     }]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: "sitestyles.css",
       chunkFilename: "[id].css"
     })
   ]
@@ -32,7 +39,7 @@ const jsconfig = {
   mode: 'development',
   entry: './src/index.js',
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
   ],
   output: {
     filename: '[name].bundle.js',

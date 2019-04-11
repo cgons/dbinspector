@@ -1,5 +1,58 @@
+@import './vendor/normalize-v801.scss';
 @import './common';
 
+// Element Styles
+// -------------------------------------------------------------------------------------
 body {
-    background: $green-primary;
+  font-family: 'Rubik', sans-serif;
+  color: $grey-dark;
 }
+
+button.unstyled {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+// Utility Styles
+// -------------------------------------------------------------------------------------
+.row {
+  lost-utility: clearfix;
+}
+
+
+// Global Site Styles
+// -------------------------------------------------------------------------------------
+.site-header {
+  padding: 15px;
+  margin-bottom: 50px;
+
+  .col {
+    lost-column: 1/2;
+  }
+
+  .site-title {
+    margin: 0;
+  }
+
+  .sign-in {
+    position: relative;
+    top: 3px;
+    text-align: right;
+
+    i {
+      margin-right: 5px;
+    }
+
+    button:hover {
+      color: $green-secondary;
+    }
+  }
+}
+
+// =====================================================================================
+
+// Import page styles
+// ------------------
+@import '../routes/Home/Home.scss';

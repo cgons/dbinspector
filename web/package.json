@@ -12,10 +12,13 @@
   "dependencies": {
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.5.1",
     "clean-webpack-plugin": "^2.0.1",
     "css-loader": "^2.1.1",
+    "lost": "^8.3.1",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
+    "postcss-loader": "^3.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
