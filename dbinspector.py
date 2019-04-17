@@ -1,12 +1,8 @@
-import logging
-from typing import Optional
-
 import sqlalchemy as sa
 
 
 class DBInspector(object):
-    """
-    Use as a context manager inspect the queries executed + query count.
+    """Use as a context manager inspect the queries executed + query count.
 
     Note: DBInspector even works with queires issued via. the ORM: `session.query()`
 
@@ -22,14 +18,13 @@ class DBInspector(object):
             inspector.print_queries(print_output=True, pretty=True)
     """
 
-    def __init__(self, conn: sa.engine.Connection, logger: Optional[logging.Logger] = None):
+    def __init__(self, conn: sa.engine.Connection):
         """Initialize the DBInspector
 
         Params:
             conn: Instance of <sqlalchemy.engine.Connection>
         """
         self.conn = conn
-        self.logger = logger
         self.count = 0
         self.queries = []
 
