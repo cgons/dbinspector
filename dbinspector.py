@@ -44,7 +44,7 @@ class DBInspector(object):
         if print_pretty:
             for i, q in enumerate(self.queries, 1):
                 print(f"\nQUERY #{i}\n----------")
-                print(str(q))
+                print(q.compile(self.conn.engine))
         else:
             for q in self.queries:
                 print(str(q))
