@@ -39,9 +39,9 @@ class DBInspector(object):
         """Returns a count of the number of queries executed."""
         return self.count
 
-    def print_queries(self, print_pretty=False):
+    def print_queries(self, pretty=False):
         """Prints all queries issused to stdout."""
-        if print_pretty:
+        if pretty:
             for i, q in enumerate(self.queries, 1):
                 print(f"\nQUERY #{i}\n----------")
                 print(q.compile(self.conn.engine))

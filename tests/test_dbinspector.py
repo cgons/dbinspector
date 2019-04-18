@@ -29,7 +29,7 @@ class TestDBInspector:
             connection.execute("SELECT 1")
 
             assert inspector.get_count() == 2
-            inspector.print_queries(print_pretty=True)
+            inspector.print_queries(pretty=True)
 
             printed_output = capsys.readouterr().out
             assert printed_output == \
