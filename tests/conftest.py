@@ -25,6 +25,3 @@ def dbsession(engine):
 @pytest.fixture
 def connection(dbsession):
     return dbsession.connection()
-
-
-

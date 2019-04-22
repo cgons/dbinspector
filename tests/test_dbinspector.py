@@ -32,5 +32,7 @@ class TestDBInspector:
             inspector.print_queries(pretty=True)
 
             printed_output = capsys.readouterr().out
-            assert printed_output == \
-                "\nQUERY #1\n----------\nSELECT 1\n\nQUERY #2\n----------\nSELECT 1\n"
+            assert (
+                printed_output
+                == "\nQUERY #1\n----------\nSELECT 1\n\nQUERY #2\n----------\nSELECT 1\n"
+            )
