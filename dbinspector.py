@@ -43,8 +43,13 @@ class DBInspector(object):
         """Prints all queries issused to stdout."""
         if pretty:
             for i, q in enumerate(self.queries, 1):
+                to_print = q
+
+                if type(q) is not str:
+                    to_print = q.compile(self.conn.engine)
+
                 print(f"\nQUERY #{i}\n----------")
-                print(q.compile(self.conn.engine))
+                print(to_print)
         else:
             for q in self.queries:
                 print(str(q))
