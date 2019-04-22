@@ -2,18 +2,18 @@
 
 A Python context manager for use with SQLAlchemy.
 
-### Features:
+### Features
 - Count the number of queires issued.
 - Capture/print the number of queries issued.
 
 ---
 
-### Installation:
+### Installation
 ```
 pip install dbinspector
 ```
 
-### Usage:
+### Usage
 
 ```
 with DBInspector(conn) as inspector:
@@ -27,7 +27,7 @@ with DBInspector(conn) as inspector:
     inspector.print_queries(pretty=True)
 ```
 
-### API:
+### API
 ```
 DBInspector.get_count() -> int
 
