@@ -15,7 +15,7 @@ class DBInspector(object):
             assert inspector.get_count() == 2
 
             # Print queries issued
-            inspector.print_queries(print_output=True, pretty=True)
+            inspector.print_queries(pretty=True)
     """
 
     def __init__(self, conn: sa.engine.Connection):
