@@ -25,6 +25,18 @@ with DBInspector(conn) as inspector:
     
     # Print queries issued
     inspector.print_queries(pretty=True)
+
+    # Example pretty printed output:
+    """
+    QUERY #1
+    ----------
+    SELECT 1
+
+    QUERY #2
+    ----------
+    SELECT 1
+    """
+
 ```
 
 ### API
