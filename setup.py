@@ -7,7 +7,7 @@ with open(os.path.join(this_directory, "README.md"), "r", encoding='utf-8') as f
 
 setuptools.setup(
     name="dbinspector",
-    version="0.1.0",
+    version="0.1.1",
     author="Chrys Gonsalves",
     author_email="cgons@pcxchange.ca",
     description="A libray for use with SQLAlchemy to count queires, log queries, etc...",
