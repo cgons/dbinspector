@@ -1,7 +1,9 @@
+import os
 import setuptools
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+this_directory = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(this_directory, "README.md"), "r", encoding='utf-8') as f:
+    long_description = f.read()
 
 setuptools.setup(
     name="dbinspector",
