@@ -23,6 +23,7 @@ setuptools.setup(
             'black',
             "ipython",
             "ipdb",
+            "wheel",
         ]
     },
     classifiers=[
