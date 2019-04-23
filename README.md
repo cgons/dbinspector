@@ -4,7 +4,7 @@ A Python context manager for use with SQLAlchemy.
 
 ### Features
 - Count the number of queires issued.
-- Capture/print the number of queries issued.
+- Capture/print the statements/queries issued.
 
 ---
 
