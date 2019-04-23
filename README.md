@@ -12,6 +12,7 @@ A Python context manager for use with SQLAlchemy.
 ```
 pip install dbinspector
 ```
+https://pypi.org/project/dbinspector/
 
 ### Usage
 
