@@ -1,22 +1,73 @@
 .content-container.home {
-    .hero {
-        padding-top: 50px;
-        text-align: center;
+  section.hero {
+    padding: 25px 10px 50px;
+    text-align: center;
 
-        .text-content {
-            padding-bottom: 25px;
-            span { color: $green-secondary; }
-        }
-
-        .get-started {
-            background: $green-secondary;
-            color: #fff;
-            padding: 12px 18px;
-            display: inline-block;
-            width: 225px;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 18px;
-        }
+    @media (max-width: 350px) {
+      padding-bottom: 85px;
     }
+
+    .text-content {
+      padding-bottom: 25px;
+      span { color: $green-secondary; }
+    }
+
+    .get-started {
+      background: $green-secondary;
+      color: #fff;
+      padding: 12px 18px;
+      display: inline-block;
+      width: 225px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .link-content {
+      color: $oc-gray-6;
+      font-weight: 500;
+    }
+  }
+
+  section.links {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+
+    a {
+      // border: 1px solid $oc-gray-2;
+      color: $oc-gray-6;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+      padding: 20px 10px;
+      width: 40%;
+
+      i {
+        font-size: 26px;
+      }
+
+      &:hover {
+        color: $grey-dark;
+      }
+
+      h4 {
+        margin: 15px 0 0;
+      }
+    }
+  }
+
+  section.how-it-works {
+    padding: 25px 0;
+    background: $oc-gray-0;
+
+    & > .title {
+      padding: 0 25px;
+    }
+
+    .sub-section {
+
+    }
+  }
 }

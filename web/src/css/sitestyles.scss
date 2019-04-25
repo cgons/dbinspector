@@ -1,5 +1,12 @@
 @import './vendor/normalize-v801.scss';
+@import '~open-color/open-color.scss';
 @import './common';
+
+
+* {
+  box-sizing: border-box;
+}
+
 
 // Element Styles
 // -------------------------------------------------------------------------------------
@@ -8,12 +15,20 @@ body {
   color: $grey-dark;
 }
 
+a, a:link, a:visited {
+  color: inherit;
+}
+
 button.unstyled {
+  padding: 0;
   background: none;
   border: none;
   cursor: pointer;
 }
 
+section > .title {
+  margin-top: 0;
+}
 
 // Utility Styles
 // -------------------------------------------------------------------------------------
@@ -25,29 +40,27 @@ button.unstyled {
 // Global Site Styles
 // -------------------------------------------------------------------------------------
 .site-header {
-  padding: 15px;
+  padding: 25px;
   margin-bottom: 50px;
-
-  .col {
-    lost-column: 1/2;
-  }
+  display: flex;
+  align-items: center;
 
   .site-title {
     margin: 0;
+    width: 60%;
   }
 
   .sign-in {
-    position: relative;
-    top: 3px;
+    flex-grow: 1;
     text-align: right;
 
-    i {
-      margin-right: 5px;
-    }
+    // i {
+    //   margin-right: 5px;
+    // }
 
-    button:hover {
-      color: $green-secondary;
-    }
+    // button:hover {
+    //   color: $green-secondary;
+    // }
   }
 }
 
